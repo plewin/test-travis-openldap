@@ -4,3 +4,4 @@ before_install:
   - curl https://ltb-project.org/lib/RPM-GPG-KEY-LTB-project | sudo apt-key add -
   - echo "deb [arch=amd64] https://ltb-project.org/debian/jessie jessie main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
+  - sudo apt-get install openldap-ltb

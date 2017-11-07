@@ -7,4 +7,10 @@ before_install:
   # cf. http://ltb-dev.ltb-project.narkive.com/dxtCIWcW/ldap-tool-box-bug-804-new-ubuntu-trusty-slapd-doesn-t-start-with-default-install
   - echo "deb [arch=amd64] https://ltb-project.org/debian/wheezy wheezy main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
-  - sudo apt-get install openldap-ltb
+  - sudo mkdir -p /usr/local/openldap/etc/openldap/
+  - sudo cp tests/ldif_data/slapd.conf /usr/local/openldap/etc/openldap/slapd.conf
+  # Install and keep the old config file inserted previously
+  - sudo apt-get -y -o Dpkg::Options::=--force-confdef install openldap-ltb
+  # Sleep 3s just to be sure that slapd is ready
+  - sleep 3
+  - /usr/local/openldap/bin/ldapadd -x -D cn=Manager,dc=my-domain,dc=com -w secret -f tests/ldif_data/init.ldif

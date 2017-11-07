@@ -15,7 +15,7 @@ class LdapClientTest extends \PHPUnit_Framework_TestCase
 
         $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
 
-        if (!$ldapbind) {
+        if ($ldapbind) {
             $this->assertTrue(true, 'Bind OK.');
         } else {
             $this->fail("could not bind to server");

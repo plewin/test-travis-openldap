@@ -14,3 +14,5 @@ before_install:
   # Sleep 3s just to be sure that slapd is ready
   - sleep 3
   - /usr/local/openldap/bin/ldapadd -x -D cn=Manager,dc=my-domain,dc=com -w secret -f tests/ldif_data/init.ldif
+
+script: phpunit tests
